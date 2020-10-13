@@ -1,0 +1,47 @@
+// Implement an efficient Search Autocomplete input to search for movie titles, loading its data from a remote service endpoint.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Autocomplete</title>
+    Included some basic styling, change at will
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/prampcontent/3ea04cbd0f61a798e96afbe5d31ec2f9/raw/e879e32222b543b29a168daa089e2f9f28cf9eb2/autocomplete.css">
+</head>
+<body>
+<form class="search-form">
+    <input type="text" class="search-input" id="searchItem" placeholder="Start typing a movie title..." onchange="getMovieDetails()">
+    <ul class="results"></ul>
+</form>
+<script src="https://cdn.rawgit.com/prampcontent/180077452f9279073cab1035f60d30cf/raw/9cbf891a80bad9ad09c6261ef9578a65502922cc/search_helper.js"></script>
+<script>
+  let searchElement = document.getElementById("searchItem"); 
+let resultsElement = document.querySelector(".results"); 
+
+function showSearchResults(searchElement) {
+        searchData(searchElement).then(results => {
+            const movieList = results.map(movie => 
+      `<li>
+        <span>${movie.title}</span>
+        <span>${movie.rating}</span>
+      </li>`
+    );
+
+            resultsElement.innerHTML = movieList.join('');
+        });
+    }
+function handleChange(){
+  return showSearchResults(this.value);
+}
+searchElement.addEventListener('change', handleChange);
+searchElement.addEventListener('keyup', handleChange);
+
+</script>
+</body>
+</html>
+
+
+
+
+
